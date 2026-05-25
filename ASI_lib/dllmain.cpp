@@ -4,6 +4,7 @@
 #include "SirenLights.h"
 #include "hooking.h"
 #include "debug.h"
+#include "Utils.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -15,33 +16,40 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
 
     case DLL_PROCESS_ATTACH:
-        success = InitializeNearHooks();
-        if (!success) {
+        if (!CheckAndRemoveCompatibilityMode()) {
+            log("Unable to load SSLA because compatibility mode is enabled!\n");
+            break;
+        }
+        
+        if (!InitializeNearHooks()) {
             log("Page allocation failed!\n");
+            break;
+        }
+
+        if (!ApplyIdHooks()) {
+            log("ID hook application failed!\n");
+            break;
         }
         else {
-            success = ApplyIdHooks();
-            if (!success) {
-                log("ID hook application failed!\n");
-            }
-            else {
-                log("ID hooks applied.\n");
-                success = ApplyIndexHooks();
-                if (!success) {
-                    log("Index hook application failed!\n");
-                }
-                else {
-                    log("Index hooks applied.\n");
-                }
-                //MessageBoxA(NULL, "Foo", NULL, MB_OK);
-                success = ApplySirenBufferHooks();
-                if (!success) {
-                    log("Buffer hook application failed!\n");
-                }
-                else {
-                    log("Buffer hooks applied.\n");
-                }
-            }
+            log("ID hooks applied.\n");
+        }
+
+        if (!ApplyIndexHooks())
+        {
+            log("Index hook application failed!\n");
+            break;
+        }
+        else {
+            log("Index hooks applied.\n");
+        }
+
+        if (!ApplySirenBufferHooks())
+        {
+            log("Buffer hook application failed!\n");
+            break;
+        }
+        else {
+            log("Buffer hooks applied.\n");
         }
         break;
     case DLL_THREAD_ATTACH:
