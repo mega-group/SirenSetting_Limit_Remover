@@ -5,8 +5,8 @@ bool ApplyIndexHooks(void);
 
 extern "C" __declspec(dllexport) int EnableRphIntegration(void*);
 
-extern "C" void LogConflict(CSirenSettings * siren1, CSirenSettings * siren2);
-extern "C" void ComputeSirenSettings(CVehicleModelInfoVarGlobal * Carcols, CVehicleModelInfoVariation * variations);
+extern "C" void LogConflict(CSirenSettings* siren1, CSirenSettings* siren2);
+extern "C" void ComputeSirenSettings(CVehicleModelInfoVarGlobal* Carcols, CVehicleModelInfoVariation* variations);
 extern "C" CSirenSettings* CloneSirenSettings(CSirenSettings* dst, CSirenSettings* src);
 extern "C" void FreeSirenSettingsAtArray(CSirenSettings_atArray* toFree);
 extern "C" void FreeSirenSettings(CSirenSettings* toFree);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NasmPath Condition= "'$(NASMPATH)' == ''">$(VCInstallDir)</NasmPath>
+    <NasmPath Condition= "'$(NASMPATH)' == ''">C:\Program Files\NASM</NasmPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <NASM>
       <Outputs>$(IntDir)%(FileName).obj</Outputs>
-      <CommandLineTemplate Condition="'$(Platform)' == 'Win32'">"$(NasmPath)\nasm.exe" -Xvc -f win32 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
-      <CommandLineTemplate Condition="'$(Platform)' == 'x64'">"$(NasmPath)\nasm.exe" -Xvc -f win64 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
+      <CommandLineTemplate Condition="'$(Platform)' == 'Win32'">nasm.exe -Xvc -f win32 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
+      <CommandLineTemplate Condition="'$(Platform)' == 'x64'">nasm.exe -Xvc -f win64 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
       <CommandLineTemplate Condition="'$(Platform)' != 'Win32' and '$(Platform)' != 'x64'">echo NASM not supported on this platform &amp; exit 1</CommandLineTemplate>
       <ExecutionDescription>%(Identity)</ExecutionDescription>
       <Message                     Condition="'%(NASM.Message)'                     == ''">Performing NASM Compilation</Message>

@@ -20,14 +20,14 @@ const Pattern DrawSirenLights_Pattern = { "0f 29 70 a8 0f 29 78 98 44 0f 29 40 8
 const Pattern GetHeadlightStatus_Pattern = { "0f b6 d2 41 0f b6 c0 4c 8b c9 8d 0c 50 0f b6 d1 41 8b 89 84 01 00 00", 0 };
 const Pattern GetHeadlightIntensity_Pattern = { "0f b6 d2 41 0f b6 c0 8d 14 50 f3 0f 10 84 91 6c 01 00 00 c3", 0 };
 const Pattern CheckForBrokenSirens_Pattern = post3788 ?
-Pattern{ "0f 2f 0d ?? ?? ?? ?? 0f 29 70 ?? 0f 29 78 ?? 49 8b f1", 0x23 } : 
-Pattern{ "4c 8b 8f ?? ?? ?? ?? 49 8b 41 20 48 8b 88 b0 00 00 00 48 8b 01 0f be 54 30 10", 0x68e };
+Pattern{ "0f 2f 0d ?? ?? ?? ?? 0f 29 70 ?? 0f 29 78 ?? 49 8b f1", 0x23 } :
+	Pattern{ "4c 8b 8f ?? ?? ?? ?? 49 8b 41 20 48 8b 88 b0 00 00 00 48 8b 01 0f be 54 30 10", 0x68e };
 const Pattern CheckForBrokenSirensTwo_Pattern = post3788 ?
 Pattern{ "80 7d ?? 00 0f 84 ?? ?? ?? ?? 48 8b 83 ?? ?? ?? ?? 48 8b 88", 0x4E } :
-Pattern{ "41 8b cf 45 8b f7 41 bc 01 00 00 00 83 e1 1f 49 c1 ee 05 41 d3 e4", 0x412 };
+	Pattern{ "41 8b cf 45 8b f7 41 bc 01 00 00 00 83 e1 1f 49 c1 ee 05 41 d3 e4", 0x412 };
 const Pattern InitThingy_Pattern = post3788 ?
 Pattern{ "48 8b ec 48 83 ec 60 48 8b 81 ?? ?? ?? ?? 33 ff 48 8b d9 f6 80", 0x14 } :
-Pattern{ "41 8b c6 41 8b ce 48 c1 e8 05 83 e1 1f 8b 84 87", 0x68 };
+	Pattern{ "41 8b c6 41 8b ce 48 c1 e8 05 83 e1 1f 8b 84 87", 0x68 };
 
 int32_t CheckSirenBoneArray(uint32_t bone, CVehicle* vehicle)
 {

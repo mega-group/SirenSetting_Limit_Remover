@@ -4,9 +4,6 @@
 #include "debug.h"
 #include <cstdint>
 #include <vector>
-#include <string>
-
-#pragma comment(lib, "shell32.lib")
 
 struct FileVersion
 {
@@ -80,7 +77,7 @@ inline const FileVersion& GetGameVersion()
                 return v;
             }
             log("Could not determine the game version. Terminating process...");
-            ExitProcess(1);
+            TerminateProcess(GetCurrentProcess(), 1);
         }();
 
     return cachedVersion;
@@ -88,7 +85,7 @@ inline const FileVersion& GetGameVersion()
 
 // Will be used soon ... 
 inline bool IsEnhanced() {
-    static const bool isEnhanced = []() -> bool 
+    static const bool isEnhanced = []() -> bool
         {
             char path[MAX_PATH];
             GetModuleFileNameA(GetModuleHandleA(nullptr), path, MAX_PATH);
@@ -100,21 +97,3 @@ inline bool IsEnhanced() {
         }();
     return isEnhanced;
 }
-
-DWORD TryExecuteCmd(const wchar_t* cmdLine, bool elevate);
-
-#pragma region Compatibility mode stuff
-
-static const wchar_t* COMPAT_REG_PATH = L"Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers";
-
-inline std::wstring GetExePath()
-{
-    wchar_t buf[MAX_PATH] = {};
-    GetModuleFileNameW(nullptr, buf, MAX_PATH);
-    return buf;
-}
-
-bool CheckAndRemoveCompatibilityMode();
-
-
-#pragma endregion

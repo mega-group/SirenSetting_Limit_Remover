@@ -171,7 +171,6 @@
     <ClCompile Include="RageStructs.cpp" />
     <ClCompile Include="SirenLights_patcher.cpp" />
     <ClCompile Include="SirenSettings_patcher.cpp" />
-    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <NASM Include="patches.nasm">

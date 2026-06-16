@@ -101,7 +101,7 @@ bool ApplyIdHooks(void)
 	if (ReallocSirenLists != NULL)
 	{
 		GtaFree = (void(*)(void*))GetReferencedAddress(ReallocSirenLists + 0x94);
-		GtaMalloc = (void*(*)(uint32_t, uint32_t))GetReferencedAddress(ReallocSirenLists + 0x43);
+		GtaMalloc = (void* (*)(uint32_t, uint32_t))GetReferencedAddress(ReallocSirenLists + 0x43);
 	}
 	logDebug("Realloc: %p\n", (void*)ReallocSirenLists);
 	uintptr_t RegisterSirenIDs = FindPattern(RegisterSirenIDs_Pattern);
@@ -118,7 +118,7 @@ bool ApplyIdHooks(void)
 
 	parMemberDefinition* SirenId = SirenSettingParser->FindMember("id");
 	parMemberDefinition* VariationId = VariationParser->FindMember("sirenSettings");
-	parMemberArrayDefinition* SirenLights = (parMemberArrayDefinition*) SirenSettingParser->FindMember("sirens");
+	parMemberArrayDefinition* SirenLights = (parMemberArrayDefinition*)SirenSettingParser->FindMember("sirens");
 
 	if (SirenId == NULL || VariationId == NULL || SirenLights == NULL)
 		return false;
@@ -136,15 +136,15 @@ bool ApplyIdHooks(void)
 	logDebug("Clone: %s\n", success ? "true" : "false");
 	{
 		uint8_t reg = 0xc3;
-		success = success && InsertHook(RegisterSirenIDs, (uintptr_t) &LogRegisteredSirens); //WriteForeignMemory(RegisterSirenIDs, &reg, 1);
+		success = success && InsertHook(RegisterSirenIDs, (uintptr_t)&LogRegisteredSirens); //WriteForeignMemory(RegisterSirenIDs, &reg, 1);
 	}
 	logDebug("Register: %s\n", success ? "true" : "false");
 	{
-		SirenSettings_init_ret = (void*) InsertHookWithSkip(CSirenSetting_Initialize + 0x1f, 
-			CSirenSetting_Initialize + 0x22, (uintptr_t) &SirenSettings_init_patch);
+		SirenSettings_init_ret = (void*)InsertHookWithSkip(CSirenSetting_Initialize + 0x1f,
+			CSirenSetting_Initialize + 0x22, (uintptr_t)&SirenSettings_init_patch);
 		success = success && SirenSettings_init_ret;
 		success = success && NopInstruction(CSirenSetting_Initialize + 0x11);
-		SirenSettings_Free_ret = (void*) InsertNearHookWithSkip(SirenSettingParser_Func + 0x1e, SirenSettingParser_Func + 0x25, (uintptr_t)&SirenSettings_Free_patch);
+		SirenSettings_Free_ret = (void*)InsertNearHookWithSkip(SirenSettingParser_Func + 0x1e, SirenSettingParser_Func + 0x25, (uintptr_t)&SirenSettings_Free_patch);
 		success = success && SirenSettings_Free_ret;
 	}
 	logDebug("Init: %s\n", success ? "true" : "false");
@@ -165,7 +165,7 @@ bool ApplyIdHooks(void)
 	{
 		ComputeSirenIndex_logic = &ComputeSirenSettings;
 		ComputeSirenIndex_ret = (void*)InsertHookWithSkip(GetLightAndSirenIndices + 0x61,
-			GetLightAndSirenIndices + 0x9c, (uintptr_t) &ComputeSirenIndex_patch);
+			GetLightAndSirenIndices + 0x9c, (uintptr_t)&ComputeSirenIndex_patch);
 		success = success && ComputeSirenIndex_ret;
 	}
 	logDebug("Compute: %s\n", success ? "true" : "false");
@@ -201,11 +201,11 @@ bool ApplyIndexHooks(void)
 	CarCols_loc = (void*)carcols;
 	{
 		GetSirenSetting_ret = (void*)InsertHookWithSkip(GetSirenSetting + 0x6,
-			GetSirenSetting + 0x22, (uintptr_t) &GetSirenSetting_patch);
-		success = success && GetSirenSetting_ret;		
+			GetSirenSetting + 0x22, (uintptr_t)&GetSirenSetting_patch);
+		success = success && GetSirenSetting_ret;
 	}
 	{
-		CopyVarToModel_ret = (void*)InsertHook(CopyVarToModel + 0xfb, (uintptr_t) &CopyVarToModel_patch);
+		CopyVarToModel_ret = (void*)InsertHook(CopyVarToModel + 0xfb, (uintptr_t)&CopyVarToModel_patch);
 		success = success && CopyVarToModel_ret;
 	}
 	{

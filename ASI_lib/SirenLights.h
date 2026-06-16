@@ -5,12 +5,12 @@
 
 
 
-extern std::map<uint32_t, int32_t *> SirenBoneMap;
+extern std::map<uint32_t, int32_t*> SirenBoneMap;
 extern CSirenSettingsExpanded expandedSettings;
-extern "C" CSirenSettingsExpanded * ExpandSirenSettings(CSirenSettings * src);
-extern "C" void MakeBoneArrays(CVehicle * vehicle);
-extern "C" int32_t CheckSirenBoneArray(uint32_t bone, CVehicle * vehicle);
-extern "C" int32_t CheckGlassBoneArray(uint32_t bone, CVehicle * vehicle);
+extern "C" CSirenSettingsExpanded* ExpandSirenSettings(CSirenSettings* src);
+extern "C" void MakeBoneArrays(CVehicle* vehicle);
+extern "C" int32_t CheckSirenBoneArray(uint32_t bone, CVehicle* vehicle);
+extern "C" int32_t CheckGlassBoneArray(uint32_t bone, CVehicle* vehicle);
 bool ApplySirenBufferHooks();
 
 extern "C" uintptr_t DSL_RotateBeatTimeSet_ret;

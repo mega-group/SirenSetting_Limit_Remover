@@ -45,9 +45,9 @@ enum struct parMemberArraySubtype : uint8_t // 0xADE25B1B
 };
 
 struct parMemberDefinition {
-	hash name;
-	uint8_t padding[4];
-	uint64_t offset;
+    hash name;
+    uint8_t padding[4];
+    uint64_t offset;
     PsoDataType type;
 };
 

@@ -65,9 +65,6 @@
     <ClCompile Include="SirenLights_patcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <NASM Include="patches.nasm">
